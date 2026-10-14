@@ -1,21 +1,19 @@
 from datetime import datetime
 from enum import Enum
 from typing import Optional
-
 from pydantic import BaseModel, Field
 
 
 # ---------- Paquetes ----------
 
 class PaqueteEnum(str, Enum):
-    """Paquetes válidos. Cualquier otro valor es rechazado por Pydantic."""
+    """Paquetes válidos, cualquier otro valor es rechazado debido a Pydantic"""
     basico = "basico"
     intermedio = "intermedio"
     premium = "premium"
 
-
 class PaqueteUpdate(BaseModel):
-    costo: float = Field(..., ge=0, description="Nuevo costo, no puede ser negativo")
+    costo: float = Field(..., ge=0)  # Costo debe ser mayor o igual a 0
 
 
 # ---------- Clientes ----------

@@ -1,11 +1,10 @@
 from fastapi import APIRouter, HTTPException
-
 from app import db
 from app.schemas import ClienteCreate, ClienteUpdate
 
 router = APIRouter(prefix="/v1/api/clientes", tags=["Clientes"])
 
-
+# ---------- Ver ----------
 @router.get("")
 def obtener_clientes():
     return {
@@ -14,7 +13,7 @@ def obtener_clientes():
         "data": db.clientes,
     }
 
-
+# ---------- Registrar ----------
 @router.post("", status_code=201)
 def registrar_cliente(datos: ClienteCreate):
     nuevo = {
@@ -26,7 +25,7 @@ def registrar_cliente(datos: ClienteCreate):
     db.clientes.append(nuevo)
     return {"success": True, "message": "Cliente registrado", "data": nuevo}
 
-
+# ---------- Actualizar ----------
 @router.put("/{id_cliente}")
 def actualizar_cliente(id_cliente: int, datos: ClienteUpdate):
     cliente = db.buscar_cliente(id_cliente)
@@ -42,7 +41,7 @@ def actualizar_cliente(id_cliente: int, datos: ClienteUpdate):
 
     return {"success": True, "message": "Cliente actualizado", "data": cliente}
 
-
+# ---------- Desactivar ----------
 @router.delete("/{id_cliente}")
 def desactivar_cliente(id_cliente: int):
     cliente = db.buscar_cliente(id_cliente)

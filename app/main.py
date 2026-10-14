@@ -1,5 +1,4 @@
 from fastapi import FastAPI
-
 from app.routers import clientes, paquetes, servicios
 
 app = FastAPI(
@@ -15,4 +14,4 @@ app.include_router(paquetes.router)
 
 @app.get("/")
 def inicio():
-    return {"mensaje": "API TotalPlay funcionando. Ve a /docs para probarla."}
+    return {"mensaje": "API TotalPlay funcionando correctamente."}
