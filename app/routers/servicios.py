@@ -24,7 +24,7 @@ def _armar_registro(servicio, cliente):
         "nombre_cliente": cliente["nombre_cliente"],
         "direccion": cliente["direccion"],
         "paquete": servicio["paquete"],
-        "costo_paquete": db.paquetes[servicio["paquete"]],  # se lee al momento: respeta costos actualizados
+        "costo_paquete": db.paquetes[servicio["paquete"]],  
         "fecha_registro": servicio["fecha_registro"],
     }
 
@@ -45,7 +45,7 @@ def consultar_servicios(
     for servicio in db.servicios:
         cliente = db.buscar_cliente(servicio["id_cliente"])
         if cliente is None or not cliente["active"]:
-            continue  # solo clientes activos
+            continue 
         fecha_servicio = _sin_zona(servicio["fecha_registro"])
         if fecha_desde and fecha_servicio < fecha_desde:
             continue
